@@ -57,6 +57,7 @@
     "bootstrap": "^5.3.5",
     "npm-check-updates": "^16.6.2",
     "sass": "^1.57.1",
-    "sass-loader": "^13.2.0"
+    "sass-loader": "^13.2.0",
+    "yup": "^1.6.1"
   }
 }
