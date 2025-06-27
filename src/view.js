@@ -67,12 +67,33 @@ function renderPosts(state, elements, i18nextInstance) {
     a.href = post.link;
     a.textContent = post.title;
 
-    li.append(a);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.classList.add('btn', 'btn-sm', 'btn-outline-primary');
+    button.setAttribute('data-id', post.postId);
+    button.setAttribute('data-bs-toggle', 'modal');
+    button.setAttribute('data-bs-target', '#modal');
+    button.textContent = i18nextInstance.t('posts.buttonText');
+
+    li.append(a, button);
     ul.append(li);
   });
 
   posts.append(card);
 }
+
+const renderPostPreview = (elements, posts) => {
+  const updatedElements = { ...elements };
+  posts.forEach((post) => {
+    updatedElements.modalTitle.textContent = post.title;
+    updatedElements.modalDescription.textContent = post.description;
+    updatedElements.modalLink.setAttribute('href', post.link);
+
+    const postLinkElement = document.querySelector(`[data-id="${post.postId}"]`);
+    postLinkElement.classList.remove('fw-bold');
+    postLinkElement.classList.add('fw-normal', 'text-muted');
+  });
+};
 
 const renderErrors = (state, elements, i18nextInstance, error) => {
   const { feedback, input } = elements;
@@ -85,13 +106,13 @@ const renderErrors = (state, elements, i18nextInstance, error) => {
   feedback.textContent = i18nextInstance.t(`${state.submitForm.error}`);
 };
 
-function renderSucces(elements, i18nextInstance) {
+function renderSuccess(elements, i18nextInstance) {
   const { input, feedback, form } = elements;
   input.classList.remove('is-invalid');
   feedback.classList.remove('text-danger');
   feedback.classList.remove('text-warning');
   feedback.classList.add('text-success');
-  feedback.textContent = i18nextInstance.t('form.succesMessage');
+  feedback.textContent = i18nextInstance.t('form.successMessage');
   form.reset();
   input.focus();
 }
@@ -100,7 +121,7 @@ const watch = (state, elements, i18nextInstance) => {
   const renderForm = (path, value) => {
     switch (path) {
       case 'formState':
-        if (value === 'finished') renderSucces(elements, i18nextInstance);
+        if (value === 'finished') renderSuccess(elements, i18nextInstance);
         break;
       case 'submitForm.error':
         renderErrors(state, elements, i18nextInstance, value);
@@ -110,6 +131,9 @@ const watch = (state, elements, i18nextInstance) => {
         break;
       case 'posts':
         renderPosts(state, elements, i18nextInstance);
+        break;
+      case 'clickedPosts':
+        renderPostPreview(elements, value);
         break;
       default:
         break;

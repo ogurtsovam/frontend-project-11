@@ -83,9 +83,10 @@ export default async () => {
     input: document.querySelector('#url-input'),
     feeds: document.querySelector('.feeds'),
     posts: document.querySelector('.posts'),
-    link: document.getElementById('readMore'),
+    modalTitle: document.querySelector('.modal-title'),
+    modalDescription: document.querySelector('.modal-body'),
+    modalLink: document.querySelector('.full-article'),
     submitButton: document.querySelector('button[type="submit"]'),
-    container: document.querySelector('container-xxl'),
   };
 
   const state = {
@@ -97,7 +98,7 @@ export default async () => {
     },
     readPosts: [],
     activePost: '',
-    clickedPost: [],
+    clickedPosts: [],
   };
 
   const i18nextInstance = i18next.createInstance();
@@ -170,7 +171,7 @@ export default async () => {
 
     if (selectedPost) {
       watchedState.activePost = selectedPost.postId;
-      watchedState.clickedPost.push(selectedPost);
+      watchedState.clickedPosts.push(selectedPost);
     }
   });
 };

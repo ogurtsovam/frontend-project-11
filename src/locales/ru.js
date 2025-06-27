@@ -4,7 +4,7 @@ export default {
       ru: 'Русский',
     },
     form: {
-      succesMessage: 'RSS успешно загружен',
+      successMessage: 'RSS успешно загружен',
       errors: {
         notEmpty: 'Не должно быть пустым',
         invalidLink: 'Ссылка должна быть валидным URL',
