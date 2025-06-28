@@ -1,4 +1,3 @@
-import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
@@ -37,9 +36,7 @@ export default {
     }),
   ],
   output: {
-    path: path.resolve('./dist'),
     filename: 'main.js',
-    publicPath: './',
     clean: true,
   },
   devServer: {
