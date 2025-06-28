@@ -136,7 +136,7 @@ const watch = (state, elements, i18nextInstance) => {
         renderPostPreview(elements, value);
         break;
       default:
-        throw new Error('Unknown state!');
+        break;
     }
   };
 
