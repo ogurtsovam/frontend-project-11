@@ -36,7 +36,6 @@ export default {
     }),
   ],
   output: {
-    filename: 'main.js',
     clean: true,
   },
   devServer: {
