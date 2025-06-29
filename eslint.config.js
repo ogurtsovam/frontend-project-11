@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { FlatCompat } from '@eslint/eslintrc';
 import pluginJs from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
+import stylisticPlugin from '@stylistic/eslint-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,10 +30,18 @@ export default [
         sourceType: 'module',
       },
     },
-    plugins: { import: importPlugin },
+    plugins: {
+      import: importPlugin,
+      '@stylistic': stylisticPlugin,
+    },
     rules: {
       ...importPlugin.configs.recommended.rules,
+      ...stylisticPlugin.configs.customize.rules,
+      '@stylistic/semi': ['error', 'never'],
+      '@stylistic/brace-style': ['error', '1tbs'],
+      '@stylistic/arrow-parens': ['error', 'always'],
     },
+
   },
   ...compat.extends('airbnb-base'),
   {
