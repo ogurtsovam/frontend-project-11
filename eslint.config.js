@@ -15,6 +15,7 @@ export default [
         process: 'readonly',
       },
       parserOptions: {
+        sourceType: 'script',
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
@@ -27,10 +28,11 @@ export default [
       ...importPlugin.configs.recommended.rules,
       ...stylistic.configs.customize.rules,
       '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
+      '@stylistic/brace-style': ['error', 'stroustrup'],
+      '@stylistic/arrow-parens': ['error', 'always'],
       '@stylistic/quote-props': ['error', 'as-needed'],
       '@stylistic/eol-last': ['error', 'always'],
+      'no-undef': ['error'], 
       'no-underscore-dangle': [
         'error',
         {

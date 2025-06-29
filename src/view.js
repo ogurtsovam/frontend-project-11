@@ -18,7 +18,7 @@ function renderFeeds(state, elements, i18nextInstance) {
   const ul = document.createElement('ul')
   ul.classList.add('list-group', 'border-0', 'rounded-0')
 
-  state.feeds.forEach(feed => {
+  state.feeds.forEach((feed) => {
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'border-0', 'border-end-0')
     const h3 = document.createElement('h3')
@@ -56,7 +56,7 @@ function renderPosts(state, elements, i18nextInstance) {
   cardBody.append(h2, ul)
   card.append(cardBody)
 
-  state.posts.forEach(post => {
+  state.posts.forEach((post) => {
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0')
     const a = document.createElement('a')
@@ -84,7 +84,7 @@ function renderPosts(state, elements, i18nextInstance) {
 
 const renderPostPreview = (elements, posts) => {
   const updatedElements = { ...elements }
-  posts.forEach(post => {
+  posts.forEach((post) => {
     updatedElements.modalTitle.textContent = post.title
     updatedElements.modalDescription.textContent = post.description
     updatedElements.modalLink.setAttribute('href', post.link)
