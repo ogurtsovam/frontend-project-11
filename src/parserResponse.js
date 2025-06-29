@@ -1,4 +1,4 @@
-const parser = (response) => {
+const parser = response => {
   const domParser = new DOMParser()
   const data = domParser.parseFromString(response.data.contents, 'application/xml')
   const parseError = data.querySelector('parsererror')
@@ -12,7 +12,7 @@ const parser = (response) => {
   const feed = { titleChannel, descriptionChannel }
 
   const itemElements = channel.getElementsByTagName('item')
-  const posts = Array.from(itemElements).map((item) => {
+  const posts = Array.from(itemElements).map(item => {
     const title = item.querySelector('title').textContent
     const description = item.querySelector('description').textContent
     const link = item.querySelector('link').textContent

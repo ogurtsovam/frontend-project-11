@@ -1,12 +1,6 @@
 import globals from 'globals'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import pluginJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
 import stylistic from '@stylistic/eslint-plugin'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 export default [
   {
@@ -34,8 +28,9 @@ export default [
       ...stylistic.configs.customize.rules,
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/arrow-parens': ['error', 'as-needed'],
       '@stylistic/quote-props': ['error', 'as-needed'],
+      '@stylistic/eol-last': ['error', 'always'],
       'no-underscore-dangle': [
         'error',
         {
