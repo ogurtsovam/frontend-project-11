@@ -1,18 +1,17 @@
-import globals from 'globals';
+import globals from 'globals'
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import pluginJs from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
-import stylisticPlugin from '@stylistic/eslint-plugin';
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { FlatCompat } from '@eslint/eslintrc'
+import pluginJs from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: pluginJs.configs.recommended,
-});
+})
 
 export default [
   {
@@ -32,20 +31,18 @@ export default [
     },
     plugins: {
       import: importPlugin,
-      '@stylistic': stylisticPlugin,
     },
     rules: {
       ...importPlugin.configs.recommended.rules,
-      ...stylisticPlugin.configs.customize.rules,
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'always'],
     },
 
   },
   ...compat.extends('airbnb-base'),
   {
     rules: {
+      semi: ['error', 'never'],
+      'brace-style': ['error', '1tbs'],
+      'arrow-parens': ['error', 'always'],
       'no-underscore-dangle': [
         'error',
         {
@@ -64,4 +61,4 @@ export default [
       'import/no-extraneous-dependencies': 'off',
     },
   },
-];
+]
