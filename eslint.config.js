@@ -1,17 +1,12 @@
 import globals from 'globals'
-
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
 import pluginJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
+import stylistic from '@stylistic/eslint-plugin'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: pluginJs.configs.recommended,
-})
 
 export default [
   {
@@ -23,6 +18,7 @@ export default [
         ...globals.node,
         ...globals.jest,
         ...globals.browser,
+        process: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
@@ -31,18 +27,15 @@ export default [
     },
     plugins: {
       import: importPlugin,
+      '@stylistic': stylistic,
     },
     rules: {
       ...importPlugin.configs.recommended.rules,
-    },
-
-  },
-  ...compat.extends('airbnb-base'),
-  {
-    rules: {
-      semi: ['error', 'never'],
-      'brace-style': ['error', '1tbs'],
-      'arrow-parens': ['error', 'always'],
+      ...stylistic.configs.customize.rules,
+      '@stylistic/semi': ['error', 'never'],
+      '@stylistic/brace-style': ['error', '1tbs'],
+      '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/quote-props': ['error', 'as-needed'],
       'no-underscore-dangle': [
         'error',
         {
