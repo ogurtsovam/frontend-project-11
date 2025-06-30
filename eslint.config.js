@@ -3,52 +3,52 @@ import importPlugin from 'eslint-plugin-import'
 import stylistic from '@stylistic/eslint-plugin'
 
 export default [
-  {
-    ignores: ['dist/'],
-  },
-  {
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-        ...globals.browser,
-        process: 'readonly',
-      },
-      parserOptions: {
-        sourceType: 'script',
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      import: importPlugin,
-      '@stylistic': stylistic,
-    },
-    rules: {
-      ...importPlugin.configs.recommended.rules,
-      ...stylistic.configs.customize.rules,
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', 'stroustrup'],
-      '@stylistic/arrow-parens': ['error', 'always'],
-      '@stylistic/quote-props': ['error', 'as-needed'],
-      '@stylistic/eol-last': ['error', 'always'],
-      'no-undef': ['error'], 
-      'no-underscore-dangle': [
-        'error',
         {
-          allow: ['__filename', '__dirname'],
+                ignores: ['dist/'],
         },
-      ],
-      'import/extensions': [
-        'error',
         {
-          js: 'always',
+                languageOptions: {
+                        globals: {
+                                ...globals.node,
+                                ...globals.jest,
+                                ...globals.browser,
+                                process: 'readonly',
+                        },
+                        parserOptions: {
+                                ecmaVersion: 'latest',
+                                sourceType: 'module',
+                        },
+                },
+                plugins: {
+                        import: importPlugin,
+                        '@stylistic': stylistic,
+                },
+                rules: {
+                        ...importPlugin.configs.recommended.rules,
+                        ...stylistic.configs.customize.rules,
+                        '@stylistic/semi': ['error', 'never'],
+                        '@stylistic/brace-style': ['error', 'stroustrup'],
+                        '@stylistic/arrow-parens': ['error', 'as-needed'],
+                        '@stylistic/quote-props': ['error', 'as-needed'],
+                        '@stylistic/eol-last': ['error', 'always'],
+                        '@stylistic/no-trailing-spaces': ['error'],
+                        'no-undef': ['error'],
+                        'no-underscore-dangle': [
+                                'error',
+                                {
+                                        allow: ['__filename', '__dirname'],
+                                },
+                        ],
+                        'import/extensions': [
+                                'error',
+                                {
+                                        js: 'always',
+                                },
+                        ],
+                        'import/no-named-as-default': 'off',
+                        'import/no-named-as-default-member': 'off',
+                        'no-console': 'off',
+                        'import/no-extraneous-dependencies': 'off',
+                },
         },
-      ],
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
-      'no-console': 'off',
-      'import/no-extraneous-dependencies': 'off',
-    },
-  },
 ]
