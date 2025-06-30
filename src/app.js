@@ -16,7 +16,7 @@ const validation = (url, readPosts, i18nextInstance) => {
   return schema
 }
 
-const getResponse = url => {
+const getResponse = (url) => {
   const urlProxy = new URL('/get', 'https://allorigins.hexlet.app')
   urlProxy.searchParams.set('disableCache', 'true')
   urlProxy.searchParams.set('url', url)
@@ -24,7 +24,7 @@ const getResponse = url => {
   return axios.get(addProxy)
 }
 
-const createPostElement = posts => posts.map(({ title, description, link }) => {
+const createPostElement = (posts) => posts.map(({ title, description, link }) => {
   const postId = uniqueId()
   return {
     title,
@@ -51,24 +51,24 @@ const createFeedElement = (parserResult, value) => {
 const updatePosts = (state, timeout = 5000) => {
   const { posts, feeds } = state
 
-  const existingLinks = new Set(posts.map(post => post.link))
+  const existingLinks = new Set(posts.map((post) => post.link))
 
-  const feedPromises = feeds.map(feed => getResponse(feed.feedLink)
+  const feedPromises = feeds.map((feed) => getResponse(feed.feedLink)
     .then(parser)
-    .then(parseData => createPostElement(parseData.posts))
-    .catch(error => {
+    .then((parseData) => createPostElement(parseData.posts))
+    .catch((error) => {
       console.error(error.message)
     }))
 
   Promise.all(feedPromises)
-    .then(newPosts => {
-      newPosts.flat().forEach(newPost => {
+    .then((newPosts) => {
+      newPosts.flat().forEach((newPost) => {
         if (!existingLinks.has(newPost.link)) {
           state.posts.unshift(newPost)
         }
       })
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error.message)
     })
     .finally(() => {
@@ -122,7 +122,7 @@ export default async () => {
 
   const watchedState = watch(state, elements, i18nextInstance)
 
-  const handleFormSubmit = inputValue => {
+  const handleFormSubmit = (inputValue) => {
     const formSchema = validation(inputValue, watchedState.readPosts, i18nextInstance)
     formSchema
       .then(() => {
@@ -130,7 +130,7 @@ export default async () => {
         elements.submitButton.setAttribute('disabled', true)
       })
       .then(() => getResponse(inputValue))
-      .then(response => {
+      .then((response) => {
         elements.submitButton.setAttribute('disabled', true)
         const parserResult = parser(response)
         const feed = createFeedElement(parserResult.feed, inputValue)
@@ -145,7 +145,7 @@ export default async () => {
         watchedState.readPosts.push(inputValue)
         updatePosts(watchedState)
       })
-      .catch(error => {
+      .catch((error) => {
         watchedState.formState = 'invalid'
         elements.submitButton.removeAttribute('disabled')
         if (error.message === 'Network Error') {
@@ -160,16 +160,16 @@ export default async () => {
       })
   }
 
-  elements.form.addEventListener('submit', event => {
+  elements.form.addEventListener('submit', (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
     const data = formData.get('url')
     handleFormSubmit(data)
   })
 
-  elements.posts.addEventListener('click', event => {
+  elements.posts.addEventListener('click', (event) => {
     const targetPostId = event.target.dataset.id
-    const selectedPost = watchedState.posts.find(post => targetPostId === post.postId)
+    const selectedPost = watchedState.posts.find((post) => targetPostId === post.postId)
 
     if (selectedPost) {
       watchedState.activePost = selectedPost.postId
