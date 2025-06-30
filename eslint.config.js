@@ -28,7 +28,7 @@ export default [
       ...stylistic.configs.customize.rules,
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/brace-style': ['error', 'stroustrup'],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
+      '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
       '@stylistic/quote-props': ['error', 'consistent-as-needed'],
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/no-trailing-spaces': ['error'],
